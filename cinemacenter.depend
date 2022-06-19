@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1490112217 source:c:\users\santi\onedrive\escritorio\cinemacenter\pila.c
+	"pila.h"
+
+1490112217 c:\users\santi\onedrive\escritorio\cinemacenter\pila.h
+	<stdio.h>
+	<malloc.h>
+
