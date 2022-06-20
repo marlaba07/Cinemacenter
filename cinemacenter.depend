@@ -6,3 +6,11 @@
 	<stdio.h>
 	<malloc.h>
 
+1655696310 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+	<string.h>
+	<conio.h>
+	<stdbool.h>
+
