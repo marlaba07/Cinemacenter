@@ -6,11 +6,20 @@
 	<stdio.h>
 	<malloc.h>
 
-1655696310 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
+1655779026 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
 	<stdio.h>
 	<stdlib.h>
 	"pila.h"
+	"login.h"
 	<string.h>
 	<conio.h>
 	<stdbool.h>
+
+1655779767 c:\users\santi\onedrive\escritorio\cinemacenter\login.h
+	<stdio.h>
+	<malloc.h>
+	<stdbool.h>
+
+1655779465 source:c:\users\santi\onedrive\escritorio\cinemacenter\login.c
+	"login.h"
 
