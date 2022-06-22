@@ -31,9 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="login.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="login.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="opciones.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="opciones.h" />
 		<Unit filename="pila.c">
 			<Option compilerVar="CC" />
 		</Unit>

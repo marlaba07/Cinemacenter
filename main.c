@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pila.h"
-#include "login.h"
 #include <string.h>
 #include <conio.h>
 #include <stdbool.h>
 
+#include "pila.h"
+#include "login.h"
+#include "admin.h"
+
 int main()
 {
-    leerUsuario();
-
+    // leerUsuario();
     welcome();
 
     return 0;
@@ -31,7 +32,7 @@ void welcome()
 
     system("cls");
 
-    bool sesion;
+    int sesion;
 
     switch(opcion)
     {
@@ -42,11 +43,15 @@ void welcome()
         break;
     case 2:
         sesion = iniciarSesion(opcion);
-        if(sesion)
+        if(sesion == 1)
         {
             menuPrincipal();
         }
-        else
+        if(sesion == 2){
+            notificacion("Ingresara a la seccion de administrador");
+            menuAdmin();
+        }
+        if(sesion == 0)
         {
             notificacion("Usuario y contraseña no coinciden.");
             welcome();
@@ -92,11 +97,7 @@ void menuPrincipal()
         welcome();
         break;
     default:
-        puts("ERROR 404\n");
-        puts("Debe ingresar una opcion valida");
-        puts("Redireccionando...");
-        sleep(3);
-        system("cls");
+        notificacion("Debe ingresar una opcion valida");
         menuPrincipal();
     }
 }

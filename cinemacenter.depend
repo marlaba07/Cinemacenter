@@ -6,20 +6,47 @@
 	<stdio.h>
 	<malloc.h>
 
-1655779026 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
+1655869781 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
 	<stdio.h>
 	<stdlib.h>
-	"pila.h"
-	"login.h"
 	<string.h>
 	<conio.h>
 	<stdbool.h>
+	"pila.h"
+	"login.h"
+	"admin.h"
 
-1655779767 c:\users\santi\onedrive\escritorio\cinemacenter\login.h
+1655869623 c:\users\santi\onedrive\escritorio\cinemacenter\login.h
 	<stdio.h>
 	<malloc.h>
 	<stdbool.h>
+	<string.h>
 
-1655779465 source:c:\users\santi\onedrive\escritorio\cinemacenter\login.c
+1655869635 source:c:\users\santi\onedrive\escritorio\cinemacenter\login.c
+	<stdio.h>
+	<stdlib.h>
 	"login.h"
+
+1655865632 c:\users\santi\onedrive\escritorio\cinemacenter\opciones.h
+	<stdio.h>
+	<malloc.h>
+	<stdbool.h>
+	<string.h>
+
+1655866003 source:c:\users\santi\onedrive\escritorio\cinemacenter\opciones.c
+	<stdio.h>
+	<stdlib.h>
+	"opciones.h"
+
+1655871192 c:\users\santi\onedrive\escritorio\cinemacenter\admin.h
+	<stdio.h>
+	<malloc.h>
+	<stdbool.h>
+	<string.h>
+
+1655871060 source:c:\users\santi\onedrive\escritorio\cinemacenter\admin.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"admin.h"
 

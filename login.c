@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "login.h"
 
 void crearUsuario(int opcion)
@@ -11,7 +13,7 @@ void crearUsuario(int opcion)
 
     if (archivo != NULL )
     {
-        Usuario usuarioCreado = formulario(opcion);
+        Usuario usuarioCreado = formularioUsuario(opcion);
         bool validarUsuario = validarUsername(usuarioCreado);
 
         if(!validarUsuario)
@@ -53,12 +55,14 @@ bool validarUsername(Usuario usuarioCreado)
     return flag;
 }
 
-bool iniciarSesion(int opcion)
+int iniciarSesion(int opcion)
 {
     printf("---- [ Iniciar sesion ] ---- ");
     printf("\n");
 
-    bool flag = false;
+    int flag = 0;
+    char username[30] = "admin";
+    char password[30] = "123";
 
     FILE * archivo;
 
@@ -66,16 +70,21 @@ bool iniciarSesion(int opcion)
 
     if (archivo != NULL )
     {
-        Usuario usuarioLogin = formulario(opcion);
+        Usuario usuarioLogin = formularioUsuario(opcion);
         Usuario usuario;
+
+        if((strcmp(usuarioLogin.nombreUsuario, username) == 0) && (strcmp(usuarioLogin.password, password) == 0))
+        {
+            flag = 2;
+            return flag;
+        }
 
         while(fread(&usuario,sizeof(Usuario),1,archivo)>0)
         {
             if((strcmp(usuarioLogin.nombreUsuario, usuario.nombreUsuario) == 0) && (strcmp(usuarioLogin.password, usuario.password) == 0))
             {
-                flag = true;
-
-                break;
+                flag = 1;
+                return flag;
             }
         }
     }
@@ -106,7 +115,7 @@ void leerUsuario()
     }
 }
 
-Usuario formulario(int opcion)
+Usuario formularioUsuario(int opcion)
 {
     Usuario usuario;
 
@@ -118,7 +127,7 @@ Usuario formulario(int opcion)
 
     if(opcion == 1)
     {
-        printf("Ingresar ubicacion: ");
+        printf("Ingresar ubicacion [Siglas]: ");
         scanf("%s", &usuario.ubicacion);
     }
 
