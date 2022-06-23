@@ -7,6 +7,7 @@
 #include "pila.h"
 #include "login.h"
 #include "admin.h"
+#include "combos.h"
 
 int main()
 {
@@ -45,10 +46,11 @@ void welcome()
         sesion = iniciarSesion(opcion);
         if(sesion == 1)
         {
+            notificacion("");
             menuPrincipal();
         }
         if(sesion == 2){
-            notificacion("Ingresara a la seccion de administrador");
+            notificacion("\nIngresara a la seccion de administrador");
             menuAdmin();
         }
         if(sesion == 0)
@@ -85,13 +87,13 @@ void menuPrincipal()
     switch(opcion)
     {
     case 1:
-        puts("Se ha pulsado una a.");
+        leerPeliculas();
         break;
     case 2:
         puts("Se ha pulsado una a.");
         break;
     case 3:
-        puts("Se ha pulsado una a.");
+        ingresarCombos();
         break;
     case 4:
         welcome();

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "login.h"
 
 void crearUsuario(int opcion)
@@ -19,7 +20,7 @@ void crearUsuario(int opcion)
         if(!validarUsuario)
         {
             fwrite(&usuarioCreado,sizeof(Usuario),1,archivo);
-            printf("\nEl usuario: %s  fue registrado con exito!\n", usuarioCreado.nombreUsuario);
+            printf("\nEl usuario: %s fue registrado con exito!\n", usuarioCreado.nombreUsuario);
         }
         else
         {

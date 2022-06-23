@@ -5,7 +5,14 @@
 
 typedef struct
 {
-    char nombrePelicula[50];
+    char nombreCine[50];
+    int numeroSala;
+
+} Cine;
+
+typedef struct
+{
+    char nombrePelicula[20];
     char fechaEstreno[20];
     char genero[10];
     float precio;
@@ -13,10 +20,16 @@ typedef struct
 } Pelicula;
 
 void menuAdmin();
-void guardarPeliculas(Pelicula arregloPelicula[]);
-void gestionarPeliculas();
+
+void guardarPeliculas(Pelicula pelicula);
+int gestionarPeliculas();
 Pelicula formularioPelicula();
 void leerPeliculas();
+
+Cine formularioCine();
+int gestionarCines();
+void guardarCines(Cine cine);
+void leerCines();
 
 
 
