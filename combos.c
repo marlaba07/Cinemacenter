@@ -8,7 +8,7 @@ void ingresarCombos()
     srand(time(NULL));
 
     printf("---- [ Opciones ] ---- ");
-    printf("\n");
+    printf("\n\n");
 
     int opcombo;
     char seleccion;
@@ -19,19 +19,23 @@ void ingresarCombos()
 
     fflush(stdin);
     puts("\n");
-    printf("Ingresar una opción: ");
+    printf("Ingresar una opcion: ");
     scanf("%d",&opcombo);
+    system("cls");
 
     switch(opcombo)
     {
     case 1:
-        printf("\nCOMBO FAMILAR:");
-        printf("2 Baldes Gigantes de Pochoclos + 4 Gaseosas \n");
-        printf("COMBO DUO:");
-        printf("1 Balde Gigante de Pochoclos + 2 Gaseosas \n");
-        printf("\nATENCION ! llevando un 'combo familiar' obtendras un BASO DE PELICULA de regalo \n");
+        printf("---- [ COMBOS DISPONIBLES ] ---- ");
 
-        printf("\n Ingrese el COMBO que desea seleccionar (duo/familiar)\n");
+        printf("\nCOMBO FAMILAR: ");
+        printf("2 Baldes Gigantes de Pochoclos + 4 Gaseosas \n");
+        printf("COMBO DUO: ");
+        printf("1 Balde Gigante de Pochoclos + 2 Gaseosas \n");
+        printf("\nATENCION ! llevando un 'combo familiar' obtendras un VASO DE PELICULA de regalo \n");
+
+        puts("\n");
+        printf("Ingrese el COMBO que desea seleccionar (Duo/Familiar): ");
         fflush(stdin);
         scanf("%s",&seleccion);
         system("cls");
@@ -41,12 +45,13 @@ void ingresarCombos()
 
         break;
     case 2:
-        printf("--DESCUENTOS DISPONILBES \n");
-        puts("\n CUPON SOLO HOY! 2x1 en salas 2D - 20% de descuento en salas 3D \n");
+        printf("---- [ DESCUENTOS DISPONIBLES ] ---- ");
 
+        puts("\n CUPON SOLO HOY! 2x1 en salas 2D - 20% de descuento en salas 3D \n");
         printf("CUPON JUBILADOS! ");
         puts("30% de descuento en salas 3D - 50% de descuento en salas 2D \n");
-        puts("Que Descuento Desea Solicitar? (solo hoy/jubilados)");
+        puts("Que descuento desea solicitar? (solo hoy/jubilados)");
+
         fflush(stdin);
         scanf("%s",&seleccion);
         system("cls");

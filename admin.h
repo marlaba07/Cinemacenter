@@ -2,22 +2,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include <string.h>
-
-typedef struct
-{
-    char nombreCine[50];
-    int numeroSala;
-
-} Cine;
-
-typedef struct
-{
-    char nombrePelicula[20];
-    char fechaEstreno[20];
-    char genero[10];
-    float precio;
-
-} Pelicula;
+#include "struct.h"
 
 void menuAdmin();
 
@@ -30,6 +15,12 @@ Cine formularioCine();
 int gestionarCines();
 void guardarCines(Cine cine);
 void leerCines();
+
+int contarRegistroPelicula(char nombre[50]);
+int contarRegistroCine(char nombre[50]);
+
+Pelicula validarIDPelicula(int opcion);
+Cine validarIDCine(int opcion);
 
 
 

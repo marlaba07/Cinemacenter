@@ -2,14 +2,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include <string.h>
-
-typedef struct
-{
-    char nombreUsuario[50];
-    char password[50];
-    char ubicacion[50];
-
-} Usuario;
+#include "struct.h"
 
 Usuario formularioUsuario(int opcion);
 int iniciarSesion(int opcion);

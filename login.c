@@ -119,21 +119,44 @@ void leerUsuario()
 Usuario formularioUsuario(int opcion)
 {
     Usuario usuario;
+    char caracter;
 
     printf("\nIngresar nombre de usuario: ");
+    fflush(stdin);
     scanf("%s", &usuario.nombreUsuario);
 
     printf("Ingresar contraseña: ");
-    scanf("%s", &usuario.password);
+    fflush(stdin);
+    // scanf("%s", &usuario.password);
+
+    int i=0;
+    while(caracter =getch())   //cree un lector de caracteres y despues lo pase al arreglo de contraseña//
+    {
+        if(caracter==13)   //si caracter es igual a 13(tecla enter) deja de ingresar
+        {
+            usuario.password[i]='\0'; //ese caracter es NULL(no lo guarda)//
+            break;
+        }
+        else
+        {
+            printf("*");
+            usuario.password[i]=caracter;
+            i++;
+        }
+
+    }
 
     if(opcion == 1)
     {
-        printf("Ingresar ubicacion [Siglas]: ");
-        scanf("%s", &usuario.ubicacion);
+        printf("Ingresar ubicacion: ");
+        fflush(stdin);
+        gets(usuario.ubicacion);
     }
 
     return usuario;
 }
+
+
 
 
 

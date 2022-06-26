@@ -8,9 +8,13 @@
 #include "login.h"
 #include "admin.h"
 #include "combos.h"
+#include "carrito.h"
+#include "struct.h"
+
 
 int main()
 {
+    // system("color b4");
     // leerUsuario();
     welcome();
 
@@ -46,11 +50,13 @@ void welcome()
         sesion = iniciarSesion(opcion);
         if(sesion == 1)
         {
-            notificacion("");
+            notificacion("\n");
             menuPrincipal();
         }
-        if(sesion == 2){
-            notificacion("\nIngresara a la seccion de administrador");
+        if(sesion == 2)
+        {
+            puts("\n");
+            notificacion("Ingresara a la seccion de administrador");
             menuAdmin();
         }
         if(sesion == 0)
@@ -82,15 +88,36 @@ void menuPrincipal()
     fflush(stdin);
     scanf("%d", &opcion);
 
+    Pelicula peliculaSeleccionada;
+
     system("cls");
 
     switch(opcion)
     {
     case 1:
         leerPeliculas();
+        printf("Ingresar ID de la pelicula que desee agregar al carrito:  ");
+        fflush(stdin);
+        scanf("%d", &opcion);
+        Pelicula peliculaSeleccionada = validarIDPelicula(opcion);
+        printf("PELICULA ID SELECCIONADA: %d \n", peliculaSeleccionada.id);
+
+
+        leerCines();
+        printf("Ingresar ID cine que desee agregar al carrito:  ");
+        fflush(stdin);
+        scanf("%d", &opcion);
+        Cine cineSeleccionado = validarIDCine(opcion);
+
+        system("cls");
+
+        crearTicket(peliculaSeleccionada, cineSeleccionado);
+
         break;
     case 2:
-        puts("Se ha pulsado una a.");
+        leerTicket();
+        system("pause");
+        menuPrincipal();
         break;
     case 3:
         ingresarCombos();
@@ -108,8 +135,17 @@ void notificacion(char mensaje[30])
 {
     puts(mensaje);
     puts("Redireccionando...");
-    sleep(3);
+    sleep(2);
     system("cls");
 }
+
+
+
+
+
+
+
+
+
 
 

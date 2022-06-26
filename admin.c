@@ -21,30 +21,41 @@ void menuAdmin()
     fflush(stdin);
     scanf("%d", &opcion);
 
-    int validosPelicula;
-    int validosCine;
+    int validos;
+    int cantidad;
 
     Cine arregloCine[] = {};
+
 
     switch(opcion)
     {
     case 1:
-        validosPelicula = gestionarPeliculas();
+        validos = gestionarPeliculas();
         notificacion("");
         menuAdmin();
         break;
     case 2:
-        validosCine = gestionarCines();
+        validos = gestionarCines();
         notificacion("");
         menuAdmin();
         break;
     case 3:
         system("cls");
+        cantidad = contarRegistroPelicula("peliculas.bin");
+        printf("Cantidad de peliculas: %d \n", cantidad);
         leerPeliculas();
+        system("pause");
+        system("cls");
+        menuAdmin();
         break;
     case 4:
         system("cls");
+        cantidad = contarRegistroCine("cines.bin");
+        printf("Cantidad de cines: %d \n", cantidad);
         leerCines();
+        system("pause");
+        system("cls");
+        menuAdmin();
         break;
     case 5:
         notificacion("");
@@ -83,10 +94,11 @@ void leerPeliculas()
         while(fread(&a,sizeof(Pelicula),1,archivo)>0)
         {
             printf("------------------------------------------------------\n");
+            printf("ID: %d\n", a.id);
             printf("Nombre de la pelicula: %s\n", a.nombrePelicula);
             printf("Fecha: %s\n", a.fechaEstreno);
+            printf("Horario: %s\n", a.horario);
             printf("Genero: %s\n", a.genero);
-            printf("Precio: %f\n", a.precio);
             printf("-----------------------------------------------------\n");
 
             printf("\n");
@@ -97,24 +109,23 @@ void leerPeliculas()
 Pelicula formularioPelicula()
 {
     Pelicula pelicula;
-    int i = 0;
-    char condicion = 's';
+    pelicula.id = contarRegistroPelicula("peliculas.bin") + 1;
 
     printf("\nIngresar nombre de la pelicula: ");
     fflush(stdin);
-    scanf("%s", &pelicula.nombrePelicula);
+    gets(pelicula.nombrePelicula);
 
     printf("Ingresar fecha: ");
     fflush(stdin);
     scanf("%s", &pelicula.fechaEstreno);
 
+    printf("Ingresar horario: ");
+    fflush(stdin);
+    scanf("%s", &pelicula.horario);
+
     printf("Ingresar genero: ");
     fflush(stdin);
     scanf("%s", &pelicula.genero);
-
-    printf("Ingresar precio: ");
-    fflush(stdin);
-    scanf("%f", &pelicula.precio);
 
     return pelicula;
 }
@@ -138,6 +149,22 @@ int gestionarPeliculas()
 
     return i;
 }
+int contarRegistroPelicula(char nombre[50])
+{
+    int cantidad = 0;
+    long tam = 0;
+
+    FILE * archi = fopen(nombre,"rb");
+    if (archi !=NULL)
+    {
+        fseek(archi,0,SEEK_END);
+        tam = ftell(archi);
+        cantidad = tam / sizeof(Pelicula);
+    }
+
+    fclose(archi);
+    return cantidad;
+}
 
 
 
@@ -146,12 +173,11 @@ int gestionarPeliculas()
 Cine formularioCine()
 {
     Cine cine;
-    int i = 0;
-    char condicion = 's';
+    cine.id = contarRegistroCine("cines.bin") + 1;
 
     printf("\nIngresar nombre del cine: ");
     fflush(stdin);
-    scanf("%s", &cine.nombreCine);
+    gets(cine.nombreCine);
 
     printf("Ingresar numero de sala: ");
     fflush(stdin);
@@ -206,8 +232,9 @@ void leerCines()
         while(fread(&a,sizeof(Cine),1,archivo)>0)
         {
             printf("------------------------------------------------------\n");
+            printf("ID: %d\n", a.id);
             printf("Nombre del cine: %s\n", a.nombreCine);
-            printf("Sala nro: %s\n", a.numeroSala);
+            printf("Sala nro: %d\n", a.numeroSala);
             printf("------------------------------------------------------\n");
 
             printf("\n");
@@ -215,8 +242,68 @@ void leerCines()
     }
 }
 
+int contarRegistroCine(char nombre[50])
+{
+    int cantidad = 0;
+    long tam = 0;
 
-// Acomodar tema espacios
-// Ajustar seccion cines como la de las peliculas
-// Agregar opción admin para que vean los cines y peliculas agregadas
+    FILE * archi = fopen(nombre,"rb");
+    if (archi !=NULL)
+    {
+        fseek(archi,0,SEEK_END);
+        tam = ftell(archi);
+        cantidad = tam / sizeof(Cine);
+    }
+
+    fclose(archi);
+    return cantidad;
+}
+
+Pelicula validarIDPelicula(int opcion)
+{
+    Pelicula a;
+
+    FILE * archivo;
+
+    archivo = fopen("peliculas.bin", "rb");
+    if(archivo != NULL)
+    {
+        while(fread(&a,sizeof(Pelicula),1,archivo)>0)
+        {
+            if(a.id == opcion)
+            {
+                return a;
+            }
+        }
+    }
+
+    fclose(archivo);
+
+    return a;
+}
+
+Cine validarIDCine(int opcion)
+{
+    Cine a;
+
+    FILE * archivo;
+
+    archivo = fopen("cines.bin", "rb");
+    if(archivo != NULL)
+    {
+        while(fread(&a,sizeof(Cine),1,archivo)>0)
+        {
+            if(a.id == opcion)
+            {
+                return a;
+            }
+        }
+    }
+
+    fclose(archivo);
+
+    return a;
+}
+
+
 
