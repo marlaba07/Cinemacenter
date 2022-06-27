@@ -67,7 +67,7 @@ void menuAdmin()
 }
 
 
-/// PELICULAS
+// --------------- |PELICULAS| -----------------
 
 void guardarPeliculas(Pelicula pelicula)
 {
@@ -97,7 +97,7 @@ void leerPeliculas()
             printf("ID: %d\n", a.id);
             printf("Nombre de la pelicula: %s\n", a.nombrePelicula);
             printf("Fecha: %s\n", a.fechaEstreno);
-            printf("Horario: %s\n", a.horario);
+            printf("Horario: %s hs\n", a.horario);
             printf("Genero: %s\n", a.genero);
             printf("-----------------------------------------------------\n");
 
@@ -166,9 +166,35 @@ int contarRegistroPelicula(char nombre[50])
     return cantidad;
 }
 
+Pelicula validarIDPelicula(int opcion)
+{
+    Pelicula pelicula;
+    Pelicula peliculaInicial = { .id = 0,
+                                 .nombrePelicula = "",
+                                 .fechaEstreno = "",
+                                 .horario = "",
+                                 .genero = ""
+                               };
+    FILE * archivo;
 
+    archivo = fopen("peliculas.bin", "rb");
+    if(archivo != NULL)
+    {
+        while(fread(&pelicula,sizeof(Pelicula),1,archivo)>0)
+        {
+            if(pelicula.id == opcion)
+            {
+                return pelicula;
+            }
+        }
+    }
 
-/// CINES
+    fclose(archivo);
+
+    return peliculaInicial;
+}
+
+// --------------- |CINES| -----------------
 
 Cine formularioCine()
 {
@@ -259,50 +285,31 @@ int contarRegistroCine(char nombre[50])
     return cantidad;
 }
 
-Pelicula validarIDPelicula(int opcion)
-{
-    Pelicula a;
-
-    FILE * archivo;
-
-    archivo = fopen("peliculas.bin", "rb");
-    if(archivo != NULL)
-    {
-        while(fread(&a,sizeof(Pelicula),1,archivo)>0)
-        {
-            if(a.id == opcion)
-            {
-                return a;
-            }
-        }
-    }
-
-    fclose(archivo);
-
-    return a;
-}
-
 Cine validarIDCine(int opcion)
 {
-    Cine a;
+    Cine cine;
+    Cine cineInicial = { .id = 0,
+                         .nombreCine = "",
+                         .numeroSala = 0,
+                       };
 
     FILE * archivo;
 
     archivo = fopen("cines.bin", "rb");
     if(archivo != NULL)
     {
-        while(fread(&a,sizeof(Cine),1,archivo)>0)
+        while(fread(&cine,sizeof(Cine),1,archivo)>0)
         {
-            if(a.id == opcion)
+            if(cine.id == opcion)
             {
-                return a;
+                return cine;
             }
         }
     }
 
     fclose(archivo);
 
-    return a;
+    return cineInicial;
 }
 
 

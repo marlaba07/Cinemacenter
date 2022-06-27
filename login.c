@@ -137,6 +137,14 @@ Usuario formularioUsuario(int opcion)
             usuario.password[i]='\0'; //ese caracter es NULL(no lo guarda)//
             break;
         }
+        else if(caracter == 8) // validacion para poder borrar
+        {
+            if(i>0)
+            {
+                i--;
+                printf("\b \b");
+            }
+        }
         else
         {
             printf("*");
@@ -148,7 +156,7 @@ Usuario formularioUsuario(int opcion)
 
     if(opcion == 1)
     {
-        printf("Ingresar ubicacion: ");
+        printf("\nIngresar ubicacion: ");
         fflush(stdin);
         gets(usuario.ubicacion);
     }

@@ -27,6 +27,7 @@ typedef struct
 
 typedef struct
 {
+    int id;
     Pelicula pelicula;
     int precio;
     int cantidadEntradas;

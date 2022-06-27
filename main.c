@@ -3,6 +3,7 @@
 #include <string.h>
 #include <conio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "pila.h"
 #include "login.h"
@@ -10,7 +11,6 @@
 #include "combos.h"
 #include "carrito.h"
 #include "struct.h"
-
 
 int main()
 {
@@ -77,6 +77,7 @@ void menuPrincipal()
     printf("---- [ Opciones ] ---- ");
     printf("\n");
 
+    srand(time(NULL));
     int opcion;
 
     printf("\n[1] ---- Opcion 1 [Ver peliculas disponibles]");
@@ -89,6 +90,7 @@ void menuPrincipal()
     scanf("%d", &opcion);
 
     Pelicula peliculaSeleccionada;
+    Ticket ticketSeleccionado;
 
     system("cls");
 
@@ -99,25 +101,60 @@ void menuPrincipal()
         printf("Ingresar ID de la pelicula que desee agregar al carrito:  ");
         fflush(stdin);
         scanf("%d", &opcion);
+
         Pelicula peliculaSeleccionada = validarIDPelicula(opcion);
-        printf("PELICULA ID SELECCIONADA: %d \n", peliculaSeleccionada.id);
-
-
-        leerCines();
-        printf("Ingresar ID cine que desee agregar al carrito:  ");
-        fflush(stdin);
-        scanf("%d", &opcion);
-        Cine cineSeleccionado = validarIDCine(opcion);
-
+        // printf("ID PELICULA: %d", peliculaSeleccionada.id);
         system("cls");
 
-        crearTicket(peliculaSeleccionada, cineSeleccionado);
+        if(peliculaSeleccionada.id != 0)
+        {
+            leerCines();
+            printf("Ingresar ID cine que desee agregar al carrito:  ");
+            fflush(stdin);
+            scanf("%d", &opcion);
+            Cine cineSeleccionado = validarIDCine(opcion);
+            system("cls");
 
+            if(cineSeleccionado.id != 0)
+            {
+                crearTicket(peliculaSeleccionada, cineSeleccionado);
+            }
+            else
+            {
+                printf("ID CINE ERRONEO. ");
+                system("pause");
+                system("cls");
+                menuPrincipal();
+            }
+
+        }
+        else
+        {
+            printf("ID PELICULA ERRONEO. ");
+            system("pause");
+            system("cls");
+            menuPrincipal();
+        }
         break;
     case 2:
         leerTicket();
+
+        printf("Elegir ID de ticket que desea abonar: ");
+        fflush(stdin);
+        scanf("%d", &opcion);
+
+        Ticket ticketSeleccionado = validarIDTicket(opcion);
+        if(ticketSeleccionado.id != 0)
+        {
+            system("cls");
+            printf("Pago realizado con exito. \n ");
+            printf("Canjear este codigo en el cine |%d| \n ",rand()%100 );
+        }
+
         system("pause");
+        notificacion("");
         menuPrincipal();
+
         break;
     case 3:
         ingresarCombos();
@@ -138,14 +175,3 @@ void notificacion(char mensaje[30])
     sleep(2);
     system("cls");
 }
-
-
-
-
-
-
-
-
-
-
-

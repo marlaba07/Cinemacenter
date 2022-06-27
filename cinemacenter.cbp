@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="admin.h" />
+		<Unit filename="carrito.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="carrito.h" />
 		<Unit filename="combos.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -50,6 +54,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="pila.h" />
+		<Unit filename="struct.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

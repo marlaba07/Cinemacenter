@@ -6,8 +6,6 @@
 #include "struct.h"
 #define PRECIO 400
 
-
-
 void guardarTicket(Ticket ticket)
 {
     FILE * archivo;
@@ -33,6 +31,7 @@ void leerTicket()
         while(fread(&a,sizeof(Ticket),1,archivo)>0)
         {
             printf("------------------------------------------------------\n");
+            printf("ID: %d\n", a.id);
             printf("Nombre de la pelicula: %s\n", a.pelicula.nombrePelicula);
             printf("Cantidad de personas: %d\n", a.cantidadEntradas);
             printf("Precio total de la entrada: $%d\n", a.precio);
@@ -50,23 +49,63 @@ void leerTicket()
 
 void crearTicket(Pelicula peliculaSeleccionada, Cine cineSeleccionado)
 {
-    if(peliculaSeleccionada.id != NULL || cineSeleccionado.id != NULL)
-    {
-        Ticket entrada;
-        entrada.pelicula = peliculaSeleccionada;
-        entrada.cine = cineSeleccionado;
-        printf("Ingresar cantidad de entradas: ");
-        fflush(stdin);
-        scanf("%d", &entrada.cantidadEntradas);
-        entrada.precio = PRECIO * entrada.cantidadEntradas;
+    Ticket entrada;
+    entrada.id = contarRegistroTicket("ticket.bin") + 1;
 
-        guardarTicket(entrada);
-        system("pause");
-        menuPrincipal();
-    }
-    else
-    {
-        notificacion("El ID de la pelicula o cine no existe. ");
-        menuPrincipal();
-    }
+    entrada.pelicula = peliculaSeleccionada;
+    entrada.cine = cineSeleccionado;
+
+    system("cls");
+    printf("Ingresar cantidad de entradas: ");
+    fflush(stdin);
+    scanf("%d", &entrada.cantidadEntradas);
+    entrada.precio = PRECIO * entrada.cantidadEntradas;
+
+    guardarTicket(entrada);
+    puts("\n");
+    notificacion("Ticket creado con exito!");
+    menuPrincipal();
 }
+
+
+Ticket validarIDTicket(int opcion)
+{
+    Ticket a;
+    Ticket b;
+    b.id = 0;
+    FILE * archivo;
+
+    archivo = fopen("Ticket.bin", "rb");
+    if(archivo != NULL)
+    {
+        while(fread(&a,sizeof(Ticket),1,archivo)>0)
+        {
+            if(a.id == opcion)
+            {
+                return a;
+            }
+        }
+    }
+
+    fclose(archivo);
+
+    return b;
+}
+
+int contarRegistroTicket(char nombre[50])
+{
+    int cantidad = 0;
+    long tam = 0;
+
+    FILE * archi = fopen(nombre,"rb");
+    if (archi !=NULL)
+    {
+        fseek(archi,0,SEEK_END);
+        tam = ftell(archi);
+        cantidad = tam / sizeof(Ticket);
+    }
+
+    fclose(archi);
+    return cantidad;
+}
+
