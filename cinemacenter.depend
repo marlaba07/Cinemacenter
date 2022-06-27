@@ -6,7 +6,7 @@
 	<stdio.h>
 	<malloc.h>
 
-1656354749 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
+1656373299 source:c:\users\santi\onedrive\escritorio\cinemacenter\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -27,7 +27,7 @@
 	<string.h>
 	"struct.h"
 
-1656354712 source:c:\users\santi\onedrive\escritorio\cinemacenter\login.c
+1656371831 source:c:\users\santi\onedrive\escritorio\cinemacenter\login.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -44,14 +44,14 @@
 	<stdlib.h>
 	"opciones.h"
 
-1656290838 c:\users\santi\onedrive\escritorio\cinemacenter\admin.h
+1656372805 c:\users\santi\onedrive\escritorio\cinemacenter\admin.h
 	<stdio.h>
 	<malloc.h>
 	<stdbool.h>
 	<string.h>
 	"struct.h"
 
-1656292172 source:c:\users\santi\onedrive\escritorio\cinemacenter\admin.c
+1656372787 source:c:\users\santi\onedrive\escritorio\cinemacenter\admin.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -69,7 +69,7 @@
 	<string.h>
 	"combos.h"
 
-1656354106 c:\users\santi\onedrive\escritorio\cinemacenter\carrito.h
+1656373270 c:\users\santi\onedrive\escritorio\cinemacenter\carrito.h
 	<stdio.h>
 	<malloc.h>
 	<stdbool.h>
@@ -77,7 +77,7 @@
 	"admin.h"
 	"struct.h"
 
-1656354953 source:c:\users\santi\onedrive\escritorio\cinemacenter\carrito.c
+1656373316 source:c:\users\santi\onedrive\escritorio\cinemacenter\carrito.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -85,7 +85,7 @@
 	"admin.h"
 	"struct.h"
 
-1656352559 c:\users\santi\onedrive\escritorio\cinemacenter\struct.h
+1656370903 c:\users\santi\onedrive\escritorio\cinemacenter\struct.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

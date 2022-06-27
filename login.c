@@ -93,8 +93,6 @@ Usuario iniciarSesion(Usuario usuarioInicial)
 
     fclose(archivo);
 
-    system("cls");
-
     return usuarioInicial;
 }
 

@@ -9,7 +9,7 @@ void menuAdmin();
 void guardarPeliculas(Pelicula pelicula);
 int gestionarPeliculas();
 Pelicula formularioPelicula();
-void leerPeliculas();
+bool leerPeliculas();
 
 Cine formularioCine();
 int gestionarCines();

@@ -83,11 +83,11 @@ void guardarPeliculas(Pelicula pelicula)
     fclose(archivo);
 }
 
-void leerPeliculas()
+bool leerPeliculas()
 {
     Pelicula a;
     FILE * archivo;
-
+    bool flag = false;
     archivo = fopen("peliculas.bin", "rb");
     if(archivo != NULL)
     {
@@ -100,10 +100,11 @@ void leerPeliculas()
             printf("Horario: %s hs\n", a.horario);
             printf("Genero: %s\n", a.genero);
             printf("-----------------------------------------------------\n");
-
+            flag = true;
             printf("\n");
         }
     }
+    return flag;
 }
 
 Pelicula formularioPelicula()

@@ -45,6 +45,4 @@ typedef struct
 
 } Ticket;
 
-
-
 #endif

@@ -21,11 +21,11 @@ void guardarTicket(Ticket ticket)
     fclose(archivo);
 }
 
-void leerTicket(Usuario sesion)
+bool leerTicket(Usuario sesion)
 {
     Ticket a;
     FILE * archivo;
-
+    bool flag = false;
     archivo = fopen("ticket.bin", "rb");
     if(archivo != NULL)
     {
@@ -35,7 +35,6 @@ void leerTicket(Usuario sesion)
             {
                 printf("------------------------------------------------------\n");
                 printf("ID: %d\n", a.id);
-                printf("ID Usuario: %d\n", a.usuario.id);
                 printf("Nombre de la pelicula: %s\n", a.pelicula.nombrePelicula);
                 printf("Cantidad de personas: %d\n", a.cantidadEntradas);
                 printf("Precio total de la entrada: $%d\n", a.precio);
@@ -45,11 +44,12 @@ void leerTicket(Usuario sesion)
                 printf("Horario: %s hs\n", a.pelicula.horario);
                 printf("Genero: %s\n", a.pelicula.genero);
                 printf("-----------------------------------------------------\n");
-
+                flag = true;
                 printf("\n");
             }
         }
     }
+    return flag;
 }
 
 void crearTicket(Usuario usuarioSeleccionado, Pelicula peliculaSeleccionada, Cine cineSeleccionado)
@@ -115,3 +115,57 @@ int contarRegistroTicket(char nombre[50])
     return cantidad;
 }
 
+void gestionarTicket(int opcion, Usuario sesion)
+{
+    printf("Ingresar ID de la pelicula que desee agregar al carrito:  ");
+    fflush(stdin);
+    scanf("%d", &opcion);
+
+    Pelicula peliculaSeleccionada = validarIDPelicula(opcion);
+    system("cls");
+
+    if(peliculaSeleccionada.id == 0)
+    {
+        printf("No se encontro la pelicula. ");
+        system("pause");
+        system("cls");
+        menuPrincipal(sesion);
+    }
+
+    leerCines();
+
+    printf("Ingresar ID cine que desee agregar al carrito:  ");
+    fflush(stdin);
+    scanf("%d", &opcion);
+
+    Cine cineSeleccionado = validarIDCine(opcion);
+    system("cls");
+
+    if(cineSeleccionado.id == 0)
+    {
+        printf("No se encontro el cine. ");
+        system("pause");
+        system("cls");
+        menuPrincipal(sesion);
+
+    }
+    crearTicket(sesion, peliculaSeleccionada, cineSeleccionado);
+}
+
+void transaccionTicket(int opcion)
+{
+    printf("Elegir ID de ticket que desea abonar: ");
+    fflush(stdin);
+    scanf("%d", &opcion);
+
+    Ticket ticketSeleccionado = validarIDTicket(opcion);
+    if(ticketSeleccionado.id != 0)
+    {
+        system("cls");
+        puts("-------------------------------------------------");
+        printf("Operacion realizada con exito.\n");
+        printf("Canjear este codigo en el cine |%d| \n ",rand() );
+        puts("-------------------------------------------------");
+        puts("\n");
+    }
+}

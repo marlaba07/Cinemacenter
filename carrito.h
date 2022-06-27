@@ -10,7 +10,9 @@
 #include "struct.h"
 
 void guardarTicket(Ticket ticket);
-void leerTicket(Usuario usuario);
+bool leerTicket(Usuario sesion);
 void crearTicket(Usuario usuarioSeleccionado, Pelicula peliculaSeleccionada, Cine cineSeleccionado);
 Ticket validarIDTicket(int opcion);
 int contarRegistroTicket(char nombre[50]);
+void gestionarTicket(int opcion, Usuario sesion);
+void transaccionTicket(int opcion);

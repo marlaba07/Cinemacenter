@@ -62,7 +62,7 @@ void ingresarCombos()
 
         puts("-------------------------------------------------");
         printf("CUPON generado correctamente |%d| \n \n",rand());
-        printf("Usted debera canjearlo en el cine");
+        printf("Usted debera canjearlo en el cine\n");
         puts("-------------------------------------------------");
 
         system("pause");
