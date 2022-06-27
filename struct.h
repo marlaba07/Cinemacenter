@@ -10,6 +10,15 @@
 typedef struct
 {
     int id;
+    char nombreUsuario[50];
+    char password[50];
+    char ubicacion[50];
+
+} Usuario;
+
+typedef struct
+{
+    int id;
     char nombreCine[50];
     int numeroSala;
 
@@ -28,19 +37,14 @@ typedef struct
 typedef struct
 {
     int id;
-    Pelicula pelicula;
     int precio;
     int cantidadEntradas;
+    Usuario usuario;
     Cine cine;
+    Pelicula pelicula;
 
 } Ticket;
 
-typedef struct
-{
-    char nombreUsuario[50];
-    char password[50];
-    char ubicacion[50];
 
-} Usuario;
 
 #endif

@@ -28,34 +28,45 @@ void ingresarCombos()
     case 1:
         printf("---- [ COMBOS DISPONIBLES ] ---- ");
 
-        printf("\nCOMBO FAMILAR: ");
+        puts("\n");
+        printf("COMBO FAMILAR: ");
         printf("2 Baldes Gigantes de Pochoclos + 4 Gaseosas \n");
         printf("COMBO DUO: ");
         printf("1 Balde Gigante de Pochoclos + 2 Gaseosas \n");
         printf("\nATENCION ! llevando un 'combo familiar' obtendras un VASO DE PELICULA de regalo \n");
 
         puts("\n");
-        printf("Ingrese el COMBO que desea seleccionar (Duo/Familiar): ");
+        printf("Ingresar COMBO de interes (Duo/Familiar): ");
         fflush(stdin);
         scanf("%s",&seleccion);
         system("cls");
-        puts("SU COMBO SE GUARDO CORRECTAMENTE ! \n");
+        puts("SU ELECCION SE GUARDO CORRECTAMENTE ! \n");
+
+        system("pause");
+        system("cls");
 
         ingresarCombos();
 
         break;
+
     case 2:
         printf("---- [ DESCUENTOS DISPONIBLES ] ---- ");
+        puts("\n");
 
-        puts("\n CUPON SOLO HOY! 2x1 en salas 2D - 20% de descuento en salas 3D \n");
-        printf("CUPON JUBILADOS! ");
-        puts("30% de descuento en salas 3D - 50% de descuento en salas 2D \n");
-        puts("Que descuento desea solicitar? (solo hoy/jubilados)");
+        puts("[CUPON SOLO HOY] - 2x1 en salas 2D - 20% de descuento en salas 3D");
+        puts("[CUPON PARA JUBILADOS] - 30% de descuento en salas 3D y 2D presentando credencial de jubilacion \n");
 
+        printf("Que descuento desea guardar? (solo hoy/jubilados): ");
         fflush(stdin);
         scanf("%s",&seleccion);
-        system("cls");
+
+        puts("-------------------------------------------------");
         printf("CUPON generado correctamente |%d| \n \n",rand());
+        printf("Usted debera canjearlo en el cine");
+        puts("-------------------------------------------------");
+
+        system("pause");
+        system("cls");
         ingresarCombos();
         break;
     case 3:

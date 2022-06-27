@@ -15,7 +15,7 @@
 int main()
 {
     // system("color b4");
-    // leerUsuario();
+    leerUsuario();
     welcome();
 
     return 0;
@@ -38,28 +38,33 @@ void welcome()
     system("cls");
 
     int sesion;
+    Usuario usuarioInicial = {   .id = -1,
+                                 .nombreUsuario = "",
+                                 .password = "",
+                                 .ubicacion = "",
+                             };
 
     switch(opcion)
     {
     case 1:
-        crearUsuario(opcion);
+        crearUsuario();
         notificacion("");
         welcome();
         break;
     case 2:
-        sesion = iniciarSesion(opcion);
-        if(sesion == 1)
+        usuarioInicial = iniciarSesion(usuarioInicial);
+        if(usuarioInicial.id != 0 && usuarioInicial.id != -1)
         {
             notificacion("\n");
-            menuPrincipal();
+            menuPrincipal(usuarioInicial);
         }
-        if(sesion == 2)
+        if(usuarioInicial.id == 0)
         {
             puts("\n");
             notificacion("Ingresara a la seccion de administrador");
             menuAdmin();
         }
-        if(sesion == 0)
+        if(usuarioInicial.id == -1)
         {
             notificacion("Usuario y contraseña no coinciden.");
             welcome();
@@ -72,7 +77,7 @@ void welcome()
     }
 }
 
-void menuPrincipal()
+void menuPrincipal(Usuario sesion)
 {
     printf("---- [ Opciones ] ---- ");
     printf("\n");
@@ -103,7 +108,6 @@ void menuPrincipal()
         scanf("%d", &opcion);
 
         Pelicula peliculaSeleccionada = validarIDPelicula(opcion);
-        // printf("ID PELICULA: %d", peliculaSeleccionada.id);
         system("cls");
 
         if(peliculaSeleccionada.id != 0)
@@ -117,14 +121,14 @@ void menuPrincipal()
 
             if(cineSeleccionado.id != 0)
             {
-                crearTicket(peliculaSeleccionada, cineSeleccionado);
+                crearTicket(sesion, peliculaSeleccionada, cineSeleccionado);
             }
             else
             {
                 printf("ID CINE ERRONEO. ");
                 system("pause");
                 system("cls");
-                menuPrincipal();
+                menuPrincipal(sesion);
             }
 
         }
@@ -133,11 +137,11 @@ void menuPrincipal()
             printf("ID PELICULA ERRONEO. ");
             system("pause");
             system("cls");
-            menuPrincipal();
+            menuPrincipal(sesion);
         }
         break;
     case 2:
-        leerTicket();
+        leerTicket(sesion);
 
         printf("Elegir ID de ticket que desea abonar: ");
         fflush(stdin);
@@ -147,13 +151,16 @@ void menuPrincipal()
         if(ticketSeleccionado.id != 0)
         {
             system("cls");
-            printf("Pago realizado con exito. \n ");
-            printf("Canjear este codigo en el cine |%d| \n ",rand()%100 );
+            puts("-------------------------------------------------");
+            printf("Operacion realizada con exito.\n");
+            printf("Canjear este codigo en el cine |%d| \n ",rand() );
+            puts("-------------------------------------------------");
         }
 
+        puts("\n");
         system("pause");
         notificacion("");
-        menuPrincipal();
+        menuPrincipal(sesion);
 
         break;
     case 3:
@@ -164,7 +171,7 @@ void menuPrincipal()
         break;
     default:
         notificacion("Debe ingresar una opcion valida");
-        menuPrincipal();
+        menuPrincipal(sesion);
     }
 }
 

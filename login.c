@@ -3,7 +3,7 @@
 #include <string.h>
 #include "login.h"
 
-void crearUsuario(int opcion)
+void crearUsuario()
 {
     printf("---- [ REGISTRO ] ---- ");
     printf("\n");
@@ -14,7 +14,7 @@ void crearUsuario(int opcion)
 
     if (archivo != NULL )
     {
-        Usuario usuarioCreado = formularioUsuario(opcion);
+        Usuario usuarioCreado = formularioUsuario();
         bool validarUsuario = validarUsername(usuarioCreado);
 
         if(!validarUsuario)
@@ -56,14 +56,18 @@ bool validarUsername(Usuario usuarioCreado)
     return flag;
 }
 
-int iniciarSesion(int opcion)
+Usuario iniciarSesion(Usuario usuarioInicial)
 {
     printf("---- [ Iniciar sesion ] ---- ");
     printf("\n");
 
     int flag = 0;
-    char username[30] = "admin";
-    char password[30] = "123";
+    Usuario admin = {.id = 0,
+                     .nombreUsuario = "admin",
+                     .password = "123",
+                     .ubicacion = "",
+                    };
+    Usuario usuario;
 
     FILE * archivo;
 
@@ -71,21 +75,18 @@ int iniciarSesion(int opcion)
 
     if (archivo != NULL )
     {
-        Usuario usuarioLogin = formularioUsuario(opcion);
-        Usuario usuario;
+        Usuario usuarioLogin = formularioLogin();
 
-        if((strcmp(usuarioLogin.nombreUsuario, username) == 0) && (strcmp(usuarioLogin.password, password) == 0))
+        if((strcmp(usuarioLogin.nombreUsuario, admin.nombreUsuario) == 0) && (strcmp(usuarioLogin.password, admin.password) == 0))
         {
-            flag = 2;
-            return flag;
+            return admin;
         }
 
         while(fread(&usuario,sizeof(Usuario),1,archivo)>0)
         {
             if((strcmp(usuarioLogin.nombreUsuario, usuario.nombreUsuario) == 0) && (strcmp(usuarioLogin.password, usuario.password) == 0))
             {
-                flag = 1;
-                return flag;
+                return usuario;
             }
         }
     }
@@ -94,7 +95,7 @@ int iniciarSesion(int opcion)
 
     system("cls");
 
-    return flag;
+    return usuarioInicial;
 }
 
 void leerUsuario()
@@ -107,6 +108,7 @@ void leerUsuario()
     {
         while(fread(&a,sizeof(Usuario),1,archivo)>0)
         {
+            printf("ID: %d\n", a.id);
             printf("Nombre de usuario: %s\n", a.nombreUsuario);
             printf("Contraseña: %s\n", a.password);
             printf("Ubicacion: %s\n", a.ubicacion);
@@ -116,7 +118,7 @@ void leerUsuario()
     }
 }
 
-Usuario formularioUsuario(int opcion)
+Usuario formularioLogin()
 {
     Usuario usuario;
     char caracter;
@@ -154,17 +156,74 @@ Usuario formularioUsuario(int opcion)
 
     }
 
-    if(opcion == 1)
-    {
-        printf("\nIngresar ubicacion: ");
-        fflush(stdin);
-        gets(usuario.ubicacion);
-    }
-
     return usuario;
 }
 
 
+Usuario formularioUsuario()
+{
+    Usuario usuario;
+    char caracter;
+
+    usuario.id = contarRegistroUsuario("usuarios.bin") + 1;
+
+    printf("\nIngresar nombre de usuario: ");
+    fflush(stdin);
+    scanf("%s", &usuario.nombreUsuario);
+
+    printf("Ingresar contraseña: ");
+    fflush(stdin);
+    // scanf("%s", &usuario.password);
+
+    int i=0;
+    while(caracter =getch())   //cree un lector de caracteres y despues lo pase al arreglo de contraseña//
+    {
+        if(caracter==13)   //si caracter es igual a 13(tecla enter) deja de ingresar
+        {
+            usuario.password[i]='\0'; //ese caracter es NULL(no lo guarda)//
+            break;
+        }
+        else if(caracter == 8) // validacion para poder borrar
+        {
+            if(i>0)
+            {
+                i--;
+                printf("\b \b");
+            }
+        }
+        else
+        {
+            printf("*");
+            usuario.password[i]=caracter;
+            i++;
+        }
+
+    }
+
+    printf("\nIngresar ubicacion: ");
+    fflush(stdin);
+    gets(usuario.ubicacion);
+
+
+    return usuario;
+}
+
+int contarRegistroUsuario(char nombre[50])
+{
+    int cantidad = 0;
+    long tam = 0;
+
+    FILE * archi = fopen(nombre,"rb");
+    if (archi !=NULL)
+    {
+        fseek(archi,0,SEEK_END);
+        tam = ftell(archi);
+        cantidad = tam / sizeof(Usuario);
+    }
+
+    fclose(archi);
+    return cantidad;
+}
 
 
 

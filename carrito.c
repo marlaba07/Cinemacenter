@@ -4,6 +4,7 @@
 #include "carrito.h"
 #include "admin.h"
 #include "struct.h"
+
 #define PRECIO 400
 
 void guardarTicket(Ticket ticket)
@@ -20,7 +21,7 @@ void guardarTicket(Ticket ticket)
     fclose(archivo);
 }
 
-void leerTicket()
+void leerTicket(Usuario sesion)
 {
     Ticket a;
     FILE * archivo;
@@ -30,30 +31,35 @@ void leerTicket()
     {
         while(fread(&a,sizeof(Ticket),1,archivo)>0)
         {
-            printf("------------------------------------------------------\n");
-            printf("ID: %d\n", a.id);
-            printf("Nombre de la pelicula: %s\n", a.pelicula.nombrePelicula);
-            printf("Cantidad de personas: %d\n", a.cantidadEntradas);
-            printf("Precio total de la entrada: $%d\n", a.precio);
-            printf("Fecha: %s\n", a.pelicula.fechaEstreno);
-            printf("Nombre de cine: %s\n", a.cine.nombreCine);
-            printf("Numero de sala: %d\n", a.cine.numeroSala);
-            printf("Horario: %s hs\n", a.pelicula.horario);
-            printf("Genero: %s\n", a.pelicula.genero);
-            printf("-----------------------------------------------------\n");
+            if(a.usuario.id == sesion.id)
+            {
+                printf("------------------------------------------------------\n");
+                printf("ID: %d\n", a.id);
+                printf("ID Usuario: %d\n", a.usuario.id);
+                printf("Nombre de la pelicula: %s\n", a.pelicula.nombrePelicula);
+                printf("Cantidad de personas: %d\n", a.cantidadEntradas);
+                printf("Precio total de la entrada: $%d\n", a.precio);
+                printf("Fecha: %s\n", a.pelicula.fechaEstreno);
+                printf("Nombre de cine: %s\n", a.cine.nombreCine);
+                printf("Numero de sala: %d\n", a.cine.numeroSala);
+                printf("Horario: %s hs\n", a.pelicula.horario);
+                printf("Genero: %s\n", a.pelicula.genero);
+                printf("-----------------------------------------------------\n");
 
-            printf("\n");
+                printf("\n");
+            }
         }
     }
 }
 
-void crearTicket(Pelicula peliculaSeleccionada, Cine cineSeleccionado)
+void crearTicket(Usuario usuarioSeleccionado, Pelicula peliculaSeleccionada, Cine cineSeleccionado)
 {
     Ticket entrada;
     entrada.id = contarRegistroTicket("ticket.bin") + 1;
 
     entrada.pelicula = peliculaSeleccionada;
     entrada.cine = cineSeleccionado;
+    entrada.usuario = usuarioSeleccionado;
 
     system("cls");
     printf("Ingresar cantidad de entradas: ");
@@ -64,7 +70,7 @@ void crearTicket(Pelicula peliculaSeleccionada, Cine cineSeleccionado)
     guardarTicket(entrada);
     puts("\n");
     notificacion("Ticket creado con exito!");
-    menuPrincipal();
+    menuPrincipal(usuarioSeleccionado);
 }
 
 
