@@ -6,12 +6,16 @@ Cuenta con un login/registro, menú principal, menú para administradores.
 En el menú de administradores es el encargado de gestionar tanto peliculas como cines. 
 En el menú principal figuran las peliculas y cines agregadas por el administrador, donde el usuario podrá seleccionar y agregar al "carrito" para posteriormente acceder a un ticket para canjearlo en el cine. 
 
+Ejercicio realizado en 'Universidad Tecnologica Nacional | Mar del Plata' correspondiente al primer año de la tecnicatura. 
+
 ### Stack tecnologico:
 
 - Variables
-- Condicionales
+- Condicionales 
 - Ciclos repetitivos
 - Funciones
+- Punteros
+- Matrices
 - Arreglos
 - Estructuras
 - Archivos
